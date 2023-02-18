@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>Roulette Martingale Strategy Simulator by Prime Solutions</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Roulette casino game simulator of a modified Martingale Strategy" name="description" />
+    <meta content="Yury Prime" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+        type="text/css" />
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet"
+        href="/Content/metronic_v4.7/theme/assets/global/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="/Content/metronic_v4.7/theme/assets/global/plugins/simple-line-icons/simple-line-icons.min.css">
+    <link rel="stylesheet" href="/Content/metronic_v4.7/theme/assets/global/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="/Content/metronic_v4.7/theme/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" href="/Content/metronic_v4.7/theme/assets/global/css/components-md.min.css">
+    <link rel="stylesheet" href="/Content/metronic_v4.7/theme/assets/global/css/plugins-md.min.css">
+    <link rel="stylesheet" href="/Content/metronic_v4.7/theme/assets/layouts/layout3/css/layout.css">
+    <link rel="stylesheet" href="/Content/metronic_v4.7/theme/assets/layouts/layout3/css/themes/default.min.css">
+    <link rel="stylesheet" href="/Content/Site.css">
+
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+
+<body class="page-container-bg-solid page-md">
+    <div class="page-wrapper" ng-app="casinoApp">
+        <div class="page-wrapper-row">
+            <div class="page-wrapper-top">
+                <!-- BEGIN HEADER -->
+                <div class="page-header hidden">
+                    <!-- BEGIN HEADER TOP -->
+                    <!-- <div class="page-header-top">
+                        <div class="container"> -->
+                            <!-- BEGIN LOGO -->
+                            <!-- <div class="page-logo">
+                                <a href="index.html">
+                                    <img src="/Content/img/CIG-Final-Logo.png" style="height: 50px" alt="CIG"
+                                        class="logo-default">
+
+                                </a>
+                            </div> -->
+                            <!-- END LOGO -->
+                            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                            <a href="javascript:;" class="menu-toggler"></a>
+                            <!-- END RESPONSIVE MENU TOGGLER -->
+                        <!-- </div>
+                    </div> -->
+                    <!-- END HEADER TOP -->
+                    <!-- BEGIN HEADER MENU -->
+                    <div class="page-header-menu">
+                        <div class="container">
+                            <!-- BEGIN MEGA MENU -->
+                            <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+                            <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
+                            <!-- <div class="hor-menu">
+                                <ul class="nav navbar-nav">
+                                    <li class="menu-dropdown classic-menu-dropdown ">
+                                        <a href="/">Home
+                                            <span class="arrow"></span>
+                                        </a>
+                                        <ul class="dropdown-menu pull-left">
+                                            <li class=" ">
+                                                <a href="index.html" class="nav-link  ">
+                                                    <i class="icon-bar-chart"></i> Menu Item 1
+                                                    <span class="badge badge-success">1</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div> -->
+                            <!-- END MEGA MENU -->
+                        </div>
+                    </div>
+                    <!-- END HEADER MENU -->
+                </div>
+                <!-- END HEADER -->
+            </div>
+        </div>
+        <div class="page-wrapper-row full-height">
+            <div class="page-wrapper-middle">
+                <!-- BEGIN CONTAINER -->
+                <div class="page-container">
+                    <!-- BEGIN CONTENT -->
+                    <div class="page-content-wrapper">
+                        <!-- BEGIN CONTENT BODY -->
+                        <!-- BEGIN PAGE HEAD-->
+                        <div class="page-head">
+                            <div class="container">
+                                <!-- BEGIN PAGE TITLE -->
+                                <div class="page-title">
+                                    <h1>
+                                        Roulette Strategy Simulator
+                                        <!-- <small>Subtitle</small> -->
+                                    </h1>
+                                </div>
+                                <!-- END PAGE TITLE -->
+                                <!-- BEGIN PAGE TOOLBAR -->
+                                <div class="page-toolbar">
+                                    <ul class="nav nav-pills">
+                                        <li ng-class="casino.viewMode == 'GAME'?'active':''">
+                                            <a href="javascript:;" ng-click="casino.viewMode = 'GAME'"><i
+                                                    class="fa fa-gamepad"></i> Game</a>
+                                        </li>
+                                        <li ng-class="casino.viewMode == 'SETTINGS'?'active':''">
+                                            <a href="javascript:;" ng-click="casino.viewMode = 'SETTINGS'"><i
+                                                    class="fa fa-cog"></i> Settings</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- END PAGE TOOLBAR -->
+                            </div>
+                        </div>
+                        <!-- END PAGE HEAD-->
+                        <!-- BEGIN PAGE CONTENT BODY -->
+                        <div class="page-content">
+                            <div class="container">
+                                <!-- BEGIN PAGE BREADCRUMBS -->
+                                <ul class="page-breadcrumb breadcrumb hidden">
+                                    <li>
+                                        <a href="index.html">Home</a>
+                                        <i class="fa fa-circle"></i>
+                                    </li>
+                                    <li>
+                                        <span>Simulator</span>
+                                    </li>
+                                </ul>
+                                <!-- END PAGE BREADCRUMBS -->
+                                <!-- BEGIN PAGE CONTENT INNER -->
+                                <div class="page-content-inner margin-top-10">
+
+                                    <!-- PAGE BODY CONTENT STARTS -->
+
+                                    <div>
+                                        <div id="roulette" ng-controller="RouletteGameController as game">
+                                            <div class="row">
+                                                <div class="col-md-11 text-center">
+                                                    <table class="roulette margin-bottom-20" border="1"
+                                                        style="width:100%">
+                                                        <tr>
+                                                            <td rowspan="3" class="tile tile-0">
+                                                                <span ng-click="game.placeBet('0')"
+                                                                    class="btn btn-block btn-circle">0</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-3">
+                                                                <span ng-click="game.placeBet('3')"
+                                                                    class="btn btn-circle">3</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-6">
+                                                                <span ng-click="game.placeBet('6')"
+                                                                    class="btn btn-circle">6</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-9">
+                                                                <span ng-click="game.placeBet('9')"
+                                                                    class="btn btn-circle">9</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-12">
+                                                                <span ng-click="game.placeBet('12')"
+                                                                    class="btn btn-circle">12</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-15">
+                                                                <span ng-click="game.placeBet('15')"
+                                                                    class="btn btn-circle">15</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-18">
+                                                                <span ng-click="game.placeBet('18')"
+                                                                    class="btn btn-circle">18</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-21">
+                                                                <span ng-click="game.placeBet('21')"
+                                                                    class="btn btn-circle">21</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-24">
+                                                                <span ng-click="game.placeBet('24')"
+                                                                    class="btn btn-circle">24</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-27">
+                                                                <span ng-click="game.placeBet('27')"
+                                                                    class="btn btn-circle">27</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-30">
+                                                                <span ng-click="game.placeBet('30')"
+                                                                    class="btn btn-circle">30</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-33">
+                                                                <span ng-click="game.placeBet('33')"
+                                                                    class="btn btn-circle">33</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-36">
+                                                                <span ng-click="game.placeBet('36')"
+                                                                    class="btn btn-circle">36</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-3rd2to1">
+                                                                <span ng-click="game.placeBet('3rd2to1')"
+                                                                    class="btn btn-circle">2 to 1</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <!-- <td> </td> -->
+                                                        </tr>
+                                                        <tr>
+                                                            <td rowspan="2" class="tile tile-2">
+                                                                <span ng-click="game.placeBet('2')"
+                                                                    class="btn btn-circle">2</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-5">
+                                                                <span ng-click="game.placeBet('5')"
+                                                                    class="btn btn-circle">5</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-8">
+                                                                <span ng-click="game.placeBet('8')"
+                                                                    class="btn btn-circle">8</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-11">
+                                                                <span ng-click="game.placeBet('11')"
+                                                                    class="btn btn-circle">11</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-14">
+                                                                <span ng-click="game.placeBet('14')"
+                                                                    class="btn btn-circle">14</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-17">
+                                                                <span ng-click="game.placeBet('17')"
+                                                                    class="btn btn-circle">17</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-20">
+                                                                <span ng-click="game.placeBet('20')"
+                                                                    class="btn btn-circle">20</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-23">
+                                                                <span ng-click="game.placeBet('23')"
+                                                                    class="btn btn-circle">23</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-26">
+                                                                <span ng-click="game.placeBet('26')"
+                                                                    class="btn btn-circle">26</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-29">
+                                                                <span ng-click="game.placeBet('29')"
+                                                                    class="btn btn-circle">29</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-32">
+                                                                <span ng-click="game.placeBet('32')"
+                                                                    class="btn btn-circle">32</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-35">
+                                                                <span ng-click="game.placeBet('35')"
+                                                                    class="btn btn-circle">35</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-2nd2to1">
+                                                                <span ng-click="game.placeBet('2nd2to1')"
+                                                                    class="btn btn-circle">2 to 1</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td rowspan="3" class="tile tile-00">
+                                                                <span ng-click="game.placeBet('00')"
+                                                                    class="btn btn-block btn-circle">00</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td rowspan="2" class="tile tile-1">
+                                                                <span ng-click="game.placeBet('1')"
+                                                                    class="btn btn-circle">1</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-4">
+                                                                <span ng-click="game.placeBet('4')"
+                                                                    class="btn btn-circle">4</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-7">
+                                                                <span ng-click="game.placeBet('7')"
+                                                                    class="btn btn-circle">7</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-10">
+                                                                <span ng-click="game.placeBet('10')"
+                                                                    class="btn btn-circle">10</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-13">
+                                                                <span ng-click="game.placeBet('13')"
+                                                                    class="btn btn-circle">13</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-16">
+                                                                <span ng-click="game.placeBet('16')"
+                                                                    class="btn btn-circle">16</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-19">
+                                                                <span ng-click="game.placeBet('19')"
+                                                                    class="btn btn-circle">19</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-22">
+                                                                <span ng-click="game.placeBet('22')"
+                                                                    class="btn btn-circle">22</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-25">
+                                                                <span ng-click="game.placeBet('25')"
+                                                                    class="btn btn-circle">25</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-28">
+                                                                <span ng-click="game.placeBet('28')"
+                                                                    class="btn btn-circle">28</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-31">
+                                                                <span ng-click="game.placeBet('31')"
+                                                                    class="btn btn-circle">31</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-34">
+                                                                <span ng-click="game.placeBet('34')"
+                                                                    class="btn btn-circle">34</span>
+                                                            </td>
+                                                            <td rowspan="2" class="tile tile-1st2to1">
+                                                                <span ng-click="game.placeBet('1st2to1')"
+                                                                    class="btn btn-circle">2 to 1</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <!-- <td></td> -->
+                                                        </tr>
+                                                        <tr>
+                                                            <td rowspan="2"></td>
+                                                            <td colspan="4" class="tile tile-1st12">
+                                                                <span ng-click="game.placeBet('1st12')"
+                                                                    class="btn btn-block btn-circle">1st 12</span>
+                                                            </td>
+                                                            <td colspan="4" class="tile tile-2nd12">
+                                                                <span ng-click="game.placeBet('2nd12')"
+                                                                    class="btn btn-block btn-circle">2nd 12</span>
+                                                            </td>
+                                                            <td colspan="4" class="tile tile-3rd12">
+                                                                <span ng-click="game.placeBet('3rd12')"
+                                                                    class="btn btn-block btn-circle">3rd 12</span>
+                                                            </td>
+                                                            <td rowspan="2" class="text-center">
+                                                                <div
+                                                                    ng-show="game.isPlaying && game.timeRemainingBeforeNextSpin != 0">
+                                                                    <div class="font-sm font-grey">Next spin in</div>
+                                                                    <div
+                                                                        class="btn btn-circle btn-icon-only md-shadow-none yellow-crusta font-lg bold font-dark">
+                                                                        {{game.timeRemainingBeforeNextSpin}}</div>
+                                                                </div>
+                                                                <div
+                                                                    ng-show="game.isPlaying && game.timeRemainingBeforeNextSpin == 0">
+                                                                    <div class="font-sm font-grey">Wheel is</div>
+                                                                    <div
+                                                                        class="btn btn-circle btn-xs md-shadow-none yellow-crusta bold font-dark">
+                                                                        Spinning</div>
+                                                                </div>
+                                                                <!-- <div ng-hide="game.isPlaying">
+                                                                    <div class="font-sm font-grey">&nbsp;</div>
+                                                                    <div class="btn btn-circle yellow-crusta bold font-dark"
+                                                                        ng-click="game.spin()">Spin</div>
+                                                                </div> -->
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" class="tile tile-1to18">
+                                                                <span ng-click="game.placeBet('1to18')"
+                                                                    class="btn btn-block btn-circle">1 to 18</span>
+                                                            </td>
+                                                            <td colspan="2" class="tile tile-even">
+                                                                <span ng-click="game.placeBet('even')"
+                                                                    class="btn btn-block btn-circle">EVEN</span>
+                                                            </td>
+                                                            <td colspan="2" class="tile tile-red">
+                                                                <span ng-click="game.placeBet('red')"
+                                                                    class="btn btn-block btn-circle">RED</span>
+                                                            </td>
+                                                            <td colspan="2" class="tile tile-black">
+                                                                <span ng-click="game.placeBet('black')"
+                                                                    class="btn btn-block btn-circle">BLACK</span>
+                                                            </td>
+                                                            <td colspan="2" class="tile tile-odd">
+                                                                <span ng-click="game.placeBet('odd')"
+                                                                    class="btn btn-block btn-circle">ODD</span>
+                                                            </td>
+                                                            <td colspan="2" class="tile tile-19to36">
+                                                                <span ng-click="game.placeBet('19to36')"
+                                                                    class="btn btn-block btn-circle">19 to 36</span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <div class="row">
+                                                        <div class="col-md-10 margin-bottom- text-left">
+                                                            <span
+                                                                class="border-right border-right-grey margin-right-30">
+                                                                <a href="javascript:;" class="chip chip-blue"
+                                                                    ng-click="game.betAmount=1"
+                                                                    ng-class="game.betAmount==1?'active':''">
+                                                                    $1
+                                                                </a>
+                                                                <a href="javascript:;" class="chip chip-red"
+                                                                    ng-click="game.betAmount=5"
+                                                                    ng-class="game.betAmount==5?'active':''">
+                                                                    $5
+                                                                </a>
+                                                                <a href="javascript:;" class="chip chip-yellow"
+                                                                    ng-click="game.betAmount=10"
+                                                                    ng-class="game.betAmount==10?'active':''">
+                                                                    $10
+                                                                </a>
+                                                                <a href="javascript:;" class="chip chip-green"
+                                                                    ng-click="game.betAmount=25"
+                                                                    ng-class="game.betAmount==25?'active':''">
+                                                                    $25
+                                                                </a>
+                                                                <a href="javascript:;" class="chip chip-black"
+                                                                    ng-click="game.betAmount=100"
+                                                                    ng-class="game.betAmount==100?'active':''">
+                                                                    $100
+                                                                </a>
+                                                            </span>
+
+                                                            <a href="javascript:;" class="chip chip-grey-light"
+                                                                ng-click="game.clearBets()">
+                                                                <small>Clear</small>
+                                                            </a>
+                                                            <a href="javascript:;" class="chip chip-orange-dark"
+                                                                ng-click="game.table.doubleBets()">
+                                                                x2
+                                                            </a>
+                                                            <a href="javascript:;" class="chip chip-green-lime"
+                                                                ng-click="game.repeatLastBet()">
+                                                                <i class="fa fa-refresh"></i>
+                                                            </a>
+                                                            <!-- <button class="btn btn-circle default"
+                                                                ng-click="game.clearBets()"><i class="fa fa-remove"></i>
+                                                                Clear Bets</button> -->
+                                                        </div>
+                                                        <div class="col-md-2 text-right">
+                                                            <button class="btn btn-circle default"
+                                                                ng-click="game.spin()"><i class="fa fa-refresh"></i>
+                                                                Spin</button><br /><br />
+                                                            <a href="javascript:;" ng-hide="game.isPlaying"
+                                                                ng-click="game.playGame()"
+                                                                class="btn btn-circle btn-primary"><i
+                                                                    class="fa fa-play"></i> Play</a>
+                                                            <a href="javascript:;" ng-show="game.isPlaying"
+                                                                ng-click="game.stopGame()"
+                                                                class="btn btn-circle red-mint"><i
+                                                                    class="fa fa-square"></i> Stop</a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <div class="felt-dark" style="overflow: hidden; height: 396px;">
+                                                        <div class="row">
+                                                            <h5 class="col-md-12 text-center font-grey-steel">
+                                                                History
+                                                            </h5>
+                                                        </div>
+                                                        <hr class="small border-grey-silver" />
+                                                        <div class="row"
+                                                            ng-repeat="item in game.history | orderBy:'id':true">
+                                                            <!-- <div class="col-md-4"><span
+                                                                    class="font-xs font-grey-silver">{{item.id}}</span>
+                                                            </div> -->
+                                                            <div class="col-md-8 col-md-offset-2">
+                                                                <div class="text-left font-red-mint bold"
+                                                                    ng-class="$index==0?'font-lg':''"
+                                                                    ng-show="item.number.color=='red'">
+                                                                    {{item.number.name}}</div>
+                                                                <div class="text-right font-yellow-crusta bold"
+                                                                    ng-class="$index==0?'font-lg':''"
+                                                                    ng-show="item.number.color=='black'">
+                                                                    {{item.number.name}}</div>
+                                                                <div class="text-center font-green-jungle bold"
+                                                                    ng-class="$index==0?'font-lg':''"
+                                                                    ng-show="item.number.color=='green'">
+                                                                    {{item.number.name}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="portlet light felt-dark md-shadow-z-1">
+                                                        <div class="portlet-title">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="caption font-lg">
+                                                                        <i class="fa fa-money"></i>
+                                                                        <span class="caption-subject">Balance: <span
+                                                                                class="bold">${{game.remainingPlayerBalance()}}</span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="caption font-lg">
+                                                                        <i class="fa fa-empire"></i>
+                                                                        <span class="caption-subject">Bet: <span
+                                                                                class="bold">${{game.totalBets}}</span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="caption font-lg">
+                                                                        <i class="fa fa-smile-o"></i>
+                                                                        <span class="caption-subject">Winnings: <span
+                                                                                class="bold">${{game.totalWinnings}}</span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="col-md-3 text-right">
+                                                                    <a href="javascript:;" class="btn btn-circle btn-xs"
+                                                                        ng-click="game.showOptions=!game.showOptions"
+                                                                        ng-class="game.showOptions?'grey-gallery':'default'"><i
+                                                                            class="fa fa-gear"></i> Settings</a>
+                                                                </div> -->
+                                                            </div>
+                                                            <!-- <div class="actions">
+                                                            </div> -->
+                                                        </div>
+                                                        <div class="portlet-body">
+                                                            <div class="row">
+
+                                                                <div class="col-md-4">
+                                                                    <h4><i class="fa fa-pie-chart font-sm"></i> Basic
+                                                                        Statistics</h4>
+                                                                    <hr class="small" />
+                                                                    <div class="row">
+                                                                        <div class="col-md-5 name">Total spins</div>
+                                                                        <div class="col-md-7 value">
+                                                                            {{game.history.length}}</div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-5 name">Total # of bets</div>
+                                                                        <div class="col-md-7 value">
+                                                                            {{game.totalNumberOfBets}}</div>
+                                                                    </div><br />
+                                                                    <div ng-show="game.history.length">
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Starting Balance
+                                                                            </div>
+                                                                            <div class="col-md-7 value">
+                                                                                ${{game.startingBankroll}}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Max Balance</div>
+                                                                            <div class="col-md-7 value">
+                                                                                ${{game.playerBalanceRecordHigh}}</div>
+                                                                        </div><br />
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Red</div>
+                                                                            <div class="col-md-7 value">
+                                                                                {{game.percentRed}}%</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Black</div>
+                                                                            <div class="col-md-7 value">
+                                                                                {{game.percentBlack}}%</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Zeros</div>
+                                                                            <div class="col-md-7 value">
+                                                                                {{game.percentGreen}}%</div>
+                                                                        </div><br />
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Odd</div>
+                                                                            <div class="col-md-7 value">
+                                                                                {{game.percentOdd}}%</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Even</div>
+                                                                            <div class="col-md-7 value">
+                                                                                {{game.percentEven}}%</div>
+                                                                        </div><br />
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Low (1-18)</div>
+                                                                            <div class="col-md-7 value">
+                                                                                {{game.percentLow}}%</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">High (19-36)</div>
+                                                                            <div class="col-md-7 value">
+                                                                                {{game.percentHigh}}%</div>
+                                                                        </div><br />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <h4><i class="fa fa-bar-chart font-sm"></i>
+                                                                        Consecutive Counters <i
+                                                                            class="fa fa-info-circle tooltips font-sm"
+                                                                            data-original-title="Number of consecutive type of numbers"></i>
+                                                                    </h4>
+                                                                    <hr class="small" />
+                                                                    <div ng-show="game.history.length">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <table
+                                                                                    class="table full-width text-center"
+                                                                                    border="1">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th class="text-center">1-18
+                                                                                            </th>
+                                                                                            <th class="text-center">EVEN
+                                                                                            </th>
+                                                                                            <th
+                                                                                                class="text-center bg-red-mint">
+                                                                                                RED</th>
+                                                                                            <th
+                                                                                                class="text-center bg-dark">
+                                                                                                BLACK</th>
+                                                                                            <th class="text-center">ODD
+                                                                                            </th>
+                                                                                            <th class="text-center">
+                                                                                                19-36</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div
+                                                                                                ng-class="game.trailingLowCount >= game.consecutivePatternMin ?'bold font-yellow-lemon':''">
+                                                                                                {{game.trailingLowCount}}
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div
+                                                                                                ng-class="game.trailingEvenCount >= game.consecutivePatternMin ?'bold font-yellow-lemon':''">
+                                                                                                {{game.trailingEvenCount}}
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div
+                                                                                                ng-class="game.trailingRedCount >= game.consecutivePatternMin ?'bold font-yellow-lemon':''">
+                                                                                                {{game.trailingRedCount}}
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div
+                                                                                                ng-class="game.trailingBlackCount >= game.consecutivePatternMin ?'bold font-yellow-lemon':''">
+                                                                                                {{game.trailingBlackCount}}
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div
+                                                                                                ng-class="game.trailingOddCount >= game.consecutivePatternMin ?'bold font-yellow-lemon':''">
+                                                                                                {{game.trailingOddCount}}
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div
+                                                                                                ng-class="game.trailingHighCount >= game.consecutivePatternMin ?'bold font-yellow-lemon':''">
+                                                                                                {{game.trailingHighCount}}
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- <div class="row">
+                                                                            <div class="col-md-5 name">Trailing Red
+                                                                            </div>
+                                                                            <div class="col-md-7 value"
+                                                                                ng-class="game.trailingRedCount >= game.consecutivePatternMin ?'bold':''">
+                                                                                {{game.trailingRedCount}} spin(s)</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Trailing Black
+                                                                            </div>
+                                                                            <div class="col-md-7 value"
+                                                                                ng-class="game.trailingBlackCount >= game.consecutivePatternMin ?'bold':''">
+                                                                                {{game.trailingBlackCount}} spin(s)
+                                                                            </div>
+                                                                        </div><br />
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Trailing Odd
+                                                                            </div>
+                                                                            <div class="col-md-7 value"
+                                                                                ng-class="game.trailingOddCount >= game.consecutivePatternMin ?'bold':''">
+                                                                                {{game.trailingOddCount}} spin(s)</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Trailing Even
+                                                                            </div>
+                                                                            <div class="col-md-7 value"
+                                                                                ng-class="game.trailingEvenCount >= game.consecutivePatternMin ?'bold':''">
+                                                                                {{game.trailingEvenCount}} spin(s)</div>
+                                                                        </div><br />
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Trailing Low
+                                                                            </div>
+                                                                            <div class="col-md-7 value"
+                                                                                ng-class="game.trailingLowCount >= game.consecutivePatternMin ?'bold':''">
+                                                                                {{game.trailingLowCount}} spin(s)</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 name">Trailing High
+                                                                            </div>
+                                                                            <div class="col-md-7 value"
+                                                                                ng-class="game.trailingHighCount >= game.consecutivePatternMin ?'bold':''">
+                                                                                {{game.trailingHighCount}} spin(s)</div>
+                                                                        </div> -->
+                                                                        <div ng-show="game.maxTrailingCount">
+                                                                            <h4><i class="fa fa-area-chart font-sm"></i>
+                                                                                Statistical Analysis <i
+                                                                                    class="fa fa-info-circle tooltips font-sm"
+                                                                                    data-original-title="Number of consecutive type of numbers [Actual %/Expected %]"></i>
+                                                                            </h4>
+                                                                            <hr class="small" />
+                                                                            <div class="row">
+                                                                                <div class="col-md-5 name">Max Count
+                                                                                </div>
+                                                                                <div class="col-md-7 value">
+                                                                                    {{game.maxTrailingCount}} spins on
+                                                                                    {{game.maxTrailingType}}</div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-5 name">Max Consec
+                                                                                    Losses </div>
+                                                                                <div class="col-md-7 value">
+                                                                                    {{game.maxConsecutiveLossCount}}
+                                                                                    losses on
+                                                                                    {{game.maxConsecutiveLossType}}
+                                                                                </div>
+                                                                            </div><br />
+                                                                        </div>
+                                                                        <div class="row"
+                                                                            ng-repeat="(key, val) in game.trailingUniques track by $index">
+                                                                            <div class="col-md-5 name">Trailing x{{key}}
+                                                                            </div>
+                                                                            <div class="col-md-7 value">{{val}} time(s)
+                                                                                [{{game.getPercentageByBets(val)}}%/{{game.getExpectedPercentage(key,val)}}%]
+                                                                            </div>
+                                                                        </div><br />
+                                                                        <div class="row"
+                                                                            ng-repeat="(key, val) in game.consecutiveLossUniques track by $index">
+                                                                            <div class="col-md-5 name">Consec. Loss
+                                                                                x{{key}}</div>
+                                                                            <div class="col-md-7 value">{{val}} time(s)
+                                                                                [{{game.getPercentageByBets(val)}}%/{{game.getExpectedPercentage(key,val)}}%]
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <h4><i class="fa fa-book font-sm"></i> Event Log
+                                                                    </h4>
+                                                                    <hr class="small" />
+                                                                    <div
+                                                                        style="overflow-y:auto;overflow-x: hidden; min-height: 200px; max-height:460px">
+                                                                        <div class=""
+                                                                            ng-repeat="msg in game.message | orderBy:'id':true">
+                                                                            <div class="row static-info">
+                                                                                <div
+                                                                                    class="col-md-2 name text-right font-xs font-grey-mint">
+                                                                                    {{msg.id}}:</div>
+                                                                                <div class="col-md-10 value"
+                                                                                    ng-bind-html="msg.text"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <!-- PAGE BODY CONTENT ENDS -->
+
+
+
+                                </div>
+                                <!-- END PAGE CONTENT INNER -->
+                            </div>
+                        </div>
+                        <!-- END PAGE CONTENT BODY -->
+                        <!-- END CONTENT BODY -->
+                    </div>
+                    <!-- END CONTENT -->
+                </div>
+                <!-- END CONTAINER -->
+            </div>
+        </div>
+        <div class="page-wrapper-row">
+            <div class="page-wrapper-bottom">
+                <!-- BEGIN FOOTER -->
+                <!-- BEGIN PRE-FOOTER -->
+                <div class="page-prefooter">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12 footer-block">
+                                <h2>About Roulette Strategy Simulator</h2>
+                                <h5 class="font-xs"> Developed by <a href="http://www.yuryprimakov.com/"
+                                        target="_blank">Yury Primakov</a></h5>
+                                <p> An engine for simulating, testing and recording statistical and analytical data on
+                                    various roulette betting strategies. </p><br />
+                                <p>
+                                    Default Strategy: Modified version of the <a
+                                        href="https://en.wikipedia.org/wiki/Martingale_(betting_system)"
+                                        target="_blank">Martingale Betting Strategy</a>. Given a certain betting
+                                    denomination, lets say $10, an outside bet
+                                    is placed on with red, black, odd, even, 1 to 18 or 19 to 36, after an opposite
+                                    consecutive spin pattern emerges. For example: 2 consecutive
+                                    times the ball lands on red, an initial bet of $10 is placed on black. If the next
+                                    spin is a win, the player looks for a new pattern. If the
+                                    next spin is a loss, however, the same bet is repeated but doubled. This continues
+                                    until the player wins. Player needs to have a bankroll to
+                                    sustain 6 consecutive losses. So for a $10 betting denomination, a player needs to
+                                    have a bankroll of $1280. Finally, the player should
+                                    set a reasonable limit to cashout earnings. The longer a player plays, the less his
+                                    odds of cashing out a winner become. Reasonable cashout
+                                    limit might be $1680 for a $400 profit.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PRE-FOOTER -->
+                <!-- BEGIN INNER FOOTER -->
+                <div class="page-footer">
+                    <div class="container">
+                        2017 &copy; Roulette Strategy Simulator &nbsp;|&nbsp;<a href="http://www.yuryprimakov.com/"
+                            target="_blank">Prime Solutions</a>
+                    </div>
+                </div>
+                <div class="scroll-to-top">
+                    <i class="icon-arrow-up"></i>
+                </div>
+                <!-- END INNER FOOTER -->
+                <!-- END FOOTER -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <script src="../assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="/Content/metronic_v4.7/theme/assets/global/plugins/jquery.min.js"></script>
+    <script src="/Content/metronic_v4.7/theme/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/Content/metronic_v4.7/theme/assets/global/plugins/angularjs/angular.min.js"></script>
+    <script src="/Content/metronic_v4.7/theme/assets/global/plugins/angularjs/angular-sanitize.min.js"></script>
+    <script src="/Content/metronic_v4.7/theme/assets/global/plugins/js.cookie.min.js"></script>
+    <script
+        src="/Content/metronic_v4.7/theme/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/Content/metronic_v4.7/theme/assets/global/plugins/jquery.blockui.min.js"></script>
+    <script
+        src="/Content/metronic_v4.7/theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script
+        src="/Content/metronic_v4.7/theme/assets/global/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
+    <script src="/Scripts/global.js"></script>
+    <script src="/Content/metronic_v4.7/theme/assets/global/scripts/app.min.js"></script>
+
+
+    <!-- GAME SCRIPTS -->
+
+    <script src="/Scripts/controllers/RouletteTable.js"></script>
+    <script src="/Scripts/controllers/RouletteWheel.js"></script>
+    <script src="/Scripts/controllers/CasinoController.js"></script>
+    <script src="/Scripts/controllers/GameEngineController.js"></script>
+
+    <!-- END GAME SCRIPTS -->
+
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <!-- END THEME LAYOUT SCRIPTS -->
+
+
+</body>
+
+</html>

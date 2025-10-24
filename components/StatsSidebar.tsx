@@ -36,7 +36,7 @@ export default function StatsSidebar({
           <div className="flex items-center justify-between mb-4 sticky top-0 bg-gray-900 py-2 z-10">
             <h2 className="text-xl font-bold text-yellow-400">Statistics</h2>
             <button
-              onClick={() => onToggle(false)}
+              onClick={onToggle}
               className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
               aria-label="Close statistics"
             >
@@ -68,7 +68,7 @@ export default function StatsSidebar({
       {/* Toggle Button - Shows when sidebar is closed */}
       {!isOpen && (
         <button
-          onClick={() => onToggle(true)}
+          onClick={onToggle}
           className="
             fixed top-20 right-0 z-30
             bg-gradient-to-l from-yellow-600 to-yellow-700
@@ -102,7 +102,7 @@ export default function StatsSidebar({
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-          onClick={() => onToggle(false)}
+          onClick={onToggle}
         />
       )}
     </>

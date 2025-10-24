@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Roulette specific styles */
+.chip {
+  @apply rounded-full border-4 border-white shadow-lg cursor-pointer transition-transform hover:scale-110;
+}
+
+.bet-spot {
+  @apply cursor-pointer hover:bg-yellow-400 hover:bg-opacity-20 transition-colors;
+}
+
+.roulette-number {
+  @apply flex items-center justify-center font-bold text-white select-none;
+}
+
+/* Chip Animation Styles */
+@keyframes chip-win {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(0, -10vh) scale(1.2) rotate(180deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(0, -30vh) scale(0.3) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes chip-loss {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(0, 10vh) scale(1.2) rotate(-180deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(0, 30vh) scale(0.3) rotate(-360deg);
+    opacity: 0;
+  }
+}
+
+.animate-chip-win {
+  animation: chip-win 1.5s ease-out forwards;
+}
+
+.animate-chip-loss {
+  animation: chip-loss 1.5s ease-out forwards;
+}
+
+/* Spinning Logo Animation */
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes spin-and-fade {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+  90% {
+    transform: rotate(2160deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(2520deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 0.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-fade-in-out {
+  animation: fade-in-out 3s ease-in-out;
+}
+
+.animate-spin-and-fade {
+  animation: spin-and-fade 3s ease-in-out;
+}
+
+/* Winning Tile Animation */
+.winning-tile {
+  position: relative;
+  box-shadow: 0 0 0 2px rgba(213, 175, 0, 0.8);
+  animation: pulse-gold 1s ease-in-out infinite;
+}
+
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 0 1px rgba(213, 175, 0, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgb(255, 255, 255);
+  }
+}

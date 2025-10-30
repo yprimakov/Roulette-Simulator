@@ -25,13 +25,13 @@ export default function TrailingCount({ statistics }: TrailingCountProps) {
   const maxMax = nonZeroMaxs.length > 0 ? Math.max(...nonZeroMaxs) : 0;
 
   return (
-    <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-sm h-64">
+    <Card outerClassName="h-full" className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-sm h-64 flex flex-col">
       <h3 className="text-lg font-bold text-yellow-400 mb-3 flex items-center">
         <span className="mr-2">📈</span>
         Trailing Count
       </h3>
       
-      <div className="space-y-3">
+      <div className="space-y-3 flex-1">
         {/* Max Trail Count */}
         {/* <div className="bg-gray-700/30 rounded-lg p-3">
           <div className="text-sm font-semibold text-gray-300 mb-1">Max Trail Count</div>

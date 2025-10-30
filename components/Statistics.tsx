@@ -36,12 +36,12 @@ export default function Statistics({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         
         {/* Balance Stats */}
-        <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-sm h-64">
+        <Card outerClassName="h-full" className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-sm h-64 flex flex-col">
           <h3 className="text-lg font-bold text-yellow-400 mb-3 flex items-center">
             <span className="mr-2">💰</span>
             Bankroll
           </h3>
-          <div className="space-y-2 text-sm">
+          <div className="space-y-2 text-sm flex-1">
             <div className="flex justify-between">
               <span className="text-gray-400">Current:</span>
               <span className="text-white font-bold">${balance.toFixed(2)}</span>
@@ -74,12 +74,12 @@ export default function Statistics({
         </Card>
 
         {/* Spin Stats */}
-        <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-sm h-64">
+        <Card outerClassName="h-full" className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-sm h-64 flex flex-col">
           <h3 className="text-lg font-bold text-yellow-400 mb-3 flex items-center">
             <span className="mr-2">🎲</span>
             Spin Stats
           </h3>
-          <div className="space-y-2 text-sm">
+          <div className="space-y-2 text-sm flex-1">
             <div className="flex justify-between">
               <span className="text-gray-400">Total Spins:</span>
               <span className="text-white font-bold">{statistics.totalSpins}</span>
@@ -106,12 +106,12 @@ export default function Statistics({
         </Card>
 
         {/* Combined Distribution Stats */}
-        <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-sm h-64">
+        <Card className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-sm h-64 flex flex-col">
           <h3 className="text-lg font-bold text-yellow-400 mb-3 flex items-center">
             <span className="mr-2">📊</span>
             Distribution Stats
           </h3>
-          <div className="space-y-4 overflow-y-auto h-48">
+          <div className="space-y-4 overflow-y-auto flex-1">
             {/* Colors Section */}
             <div>
               <div className="space-y-2">

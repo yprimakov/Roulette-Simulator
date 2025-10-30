@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roulette Strategy Simulator - Project Descriptions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+        .capabilities {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 15px 0;
+        }
+        .technologies {
+            background-color: #f1f2f6;
+            padding: 15px;
+            border-left: 4px solid #27ae60;
+            margin: 15px 0;
+        }
+        ul {
+            margin: 10px 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .disclaimer {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .conclusion {
+            background-color: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Roulette Strategy Simulator - Project Descriptions</h1>
+
+<h2>Short Description</h2>
+
+<p>RouletteSim is a personal side project I built to test roulette betting strategies. It started during a ski trip to Lake Tahoe with my brother - we hit a casino and I got curious about how betting systems actually work. The original version was a quick 2-week ASP.NET MVC proof-of-concept, but I've since rebuilt it with modern web tech (Next.js, TypeScript) just for fun and learning.</p>
+
+<p>The app lets you play realistic roulette, test strategies like Martingale, and see all the stats in real-time. It's basically a way to understand how roulette actually works without risking real money. Perfect for anyone curious about casino math or wanting to see why betting systems don't actually beat the house edge.</p>
+
+<div class="capabilities">
+<h3>Key Capabilities</h3>
+<ul>
+<li><strong>Realistic Roulette</strong>: European roulette with proper random number generation</li>
+<li><strong>Betting Strategies</strong>: Test Martingale and other systems with auto-play</li>
+<li><strong>Live Stats</strong>: See patterns, streaks, and win/loss ratios as you play</li>
+<li><strong>Strategy Testing</strong>: Run extended sessions to see how strategies perform over time</li>
+<li><strong>Educational</strong>: Learn why the house always wins (spoiler: math)</li>
+<li><strong>Customizable</strong>: Adjust bet amounts, loss limits, and game settings</li>
+<li><strong>Performance Tracking</strong>: Track your bankroll and betting patterns</li>
+</ul>
+</div>
+
+<div class="technologies">
+<h3>Technologies</h3>
+<ul>
+<li><strong>Frontend</strong>: Next.js 14, TypeScript, Tailwind CSS</li>
+<li><strong>State Management</strong>: React Hooks</li>
+<li><strong>Random Numbers</strong>: Web Crypto API (cryptographically secure)</li>
+<li><strong>Animations</strong>: CSS animations for smooth gameplay</li>
+<li><strong>Architecture</strong>: Clean, modular component structure</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>Long Description</h2>
+
+<h3>Overview</h3>
+
+<p>RouletteSim is a personal side project I built to test roulette betting strategies. It started during a ski trip to Lake Tahoe with my brother - we hit a casino and I got curious about how betting systems actually work. The original version was a quick 2-week ASP.NET MVC proof-of-concept, but I've since rebuilt it with modern web tech (Next.js, TypeScript) just for fun and learning.</p>
+
+<p>The app lets you play realistic roulette, test strategies like Martingale, and see all the stats in real-time. It's basically a way to understand how roulette actually works without risking real money. Perfect for anyone curious about casino math or wanting to see why betting systems don't actually beat the house edge.</p>
+
+<h3>Project Origins & Evolution</h3>
+
+<p>This started as pure curiosity during a ski trip. We went to a casino in Lake Tahoe, I watched people play roulette, and wondered if those betting systems actually worked. So I built a quick ASP.NET MVC app in about 2 weeks just to test it out.</p>
+
+<p>Never intended this for business or anything serious - just wanted to satisfy my own curiosity about roulette mechanics and betting strategies. The goal was simple: simulate extended play sessions to see how strategies like Martingale actually perform over time.</p>
+
+<p>The original ASP.NET version worked fine, but I wanted to learn modern web development, so I rebuilt everything with Next.js, TypeScript, and Tailwind CSS. Much cleaner codebase and better user experience.</p>
+
+<h3>Key Capabilities</h3>
+
+<div class="capabilities">
+<ul>
+<li><strong>Realistic Roulette</strong>: European roulette with proper random number generation</li>
+<li><strong>Betting Strategies</strong>: Test Martingale and other systems with auto-play</li>
+<li><strong>Live Stats</strong>: See patterns, streaks, and win/loss ratios as you play</li>
+<li><strong>Strategy Testing</strong>: Run extended sessions to see how strategies perform over time</li>
+<li><strong>Educational</strong>: Learn why the house always wins (spoiler: math)</li>
+<li><strong>Customizable</strong>: Adjust bet amounts, loss limits, and game settings</li>
+<li><strong>Performance Tracking</strong>: Track your bankroll and betting patterns</li>
+</ul>
+</div>
+
+<h3>Core Functionality</h3>
+
+<p><strong>Game Engine:</strong></p>
+<ul>
+<li>European roulette (37 numbers: 0-36)</li>
+<li>Cryptographically secure random numbers</li>
+<li>Smooth wheel animation</li>
+<li>Accurate payouts</li>
+</ul>
+
+<p><strong>Betting System:</strong></p>
+<ul>
+<li>All inside bets (straight, split, street, corner, line)</li>
+<li>All outside bets (red/black, odd/even, high/low, dozens, columns)</li>
+<li>Multiple bets at once</li>
+<li>Bet management (clear, double, repeat)</li>
+</ul>
+
+<p><strong>Strategy Testing:</strong></p>
+<ul>
+<li>Modified Martingale implementation</li>
+<li>Pattern detection</li>
+<li>Auto-betting based on streaks</li>
+<li>Configurable settings</li>
+</ul>
+
+<p><strong>Analytics & Statistics:</strong></p>
+<ul>
+<li>Real-time color tracking</li>
+<li>Odd/even and high/low analysis</li>
+<li>Streak monitoring</li>
+<li>Bankroll tracking</li>
+<li>Session stats</li>
+</ul>
+
+<p><strong>User Interface:</strong></p>
+<ul>
+<li>Interactive betting table</li>
+<li>Live stats dashboard</li>
+<li>Auto-play mode</li>
+<li>Mobile-friendly design</li>
+</ul>
+
+<h3>Technologies</h3>
+
+<div class="technologies">
+<ul>
+<li><strong>Frontend</strong>: Next.js 14, TypeScript, Tailwind CSS</li>
+<li><strong>State Management</strong>: React Hooks</li>
+<li><strong>Random Numbers</strong>: Web Crypto API</li>
+<li><strong>Animations</strong>: CSS animations</li>
+<li><strong>Architecture</strong>: Clean, modular components</li>
+</ul>
+</div>
+
+<h3>Challenges & Solutions</h3>
+
+<p><strong>Realistic Randomness</strong>: Used Web Crypto API for proper random number generation instead of basic Math.random()</p>
+
+<p><strong>Educational Value</strong>: Made complex probability concepts visual and easy to understand</p>
+
+<p><strong>Performance</strong>: Optimized state management and rendering for smooth gameplay</p>
+
+<p><strong>Responsive Design</strong>: Built modular components that work on desktop and mobile</p>
+
+<h3>Limitations and Disclaimers</h3>
+
+<div class="disclaimer">
+<p>This is purely for education and entertainment. Don't use it as gambling advice because:</p>
+<ol>
+<li>Real casinos are different from simulations</li>
+<li>No strategy beats the house edge (it's math)</li>
+<li>Gambling can be addictive</li>
+<li>This uses idealized conditions</li>
+</ol>
+
+<p>The whole point is to show why betting systems don't work, not to promote them. Martingale might look good in short simulations, but it always fails eventually.</p>
+</div>
+
+<h3>Future Enhancements</h3>
+
+<p>Maybe add:</p>
+<ul>
+<li>American roulette (00 wheel)</li>
+<li>More betting strategies (Fibonacci, D'Alembert)</li>
+<li>Save sessions to database</li>
+<li>Better charts and visualizations</li>
+<li>Mobile app</li>
+<li>Multiplayer mode</li>
+</ul>
+
+<h3>Conclusion</h3>
+
+<div class="conclusion">
+<p>This project started as curiosity during a ski trip and became a fun way to learn modern web development. It's not revolutionary or profitable, but it does a good job showing how roulette actually works. Sometimes the best projects are just about satisfying your own curiosity and learning something new.</p>
+
+<p>The house always wins, but at least now I understand why!</p>
+</div>
+
+</body>
+</html>
